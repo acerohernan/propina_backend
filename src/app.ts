@@ -18,5 +18,5 @@ app.listen(PORT, async () => {
 
   await connect();
 
-  swaggerDocs(app, Number(PORT));
+  swaggerDocs(app);
 });

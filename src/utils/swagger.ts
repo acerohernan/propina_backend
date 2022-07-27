@@ -32,7 +32,7 @@ const options: swaggerJsDoc.Options = {
 
 const swaggerSpec = swaggerJsDoc(options);
 
-function swaggerDocs(app: Express, port: number) {
+function swaggerDocs(app: Express) {
   //Swagger page
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

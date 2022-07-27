@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Arte",
+    "img": "https://cdn.cafecito.app/imgs/categories/art.svg"
+  },
+  {
+    "name": "Artesanías",
+    "img": "https://cdn.cafecito.app/imgs/categories/crafts.svg"
+  },
+  {
+    "name": "Blog",
+    "img": "https://cdn.cafecito.app/imgs/categories/blog.svg"
+  }
+]
