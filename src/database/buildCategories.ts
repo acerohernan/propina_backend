@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import CategoryModel, { CategoryInput } from '../models/category.model';
+import CategoryModel, { CategoryInput } from '../models/user/category.model';
 import logger from '../utils/logger';
 
 async function buildCategories() {

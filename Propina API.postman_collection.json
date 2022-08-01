@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "fc84c5fe-d6c4-4956-a2bb-465d79761b9d",
+		"name": "Propina API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sing Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ariana@gmail.com\",\n    \"username\": \"ariana123\",\n    \"password\": \"ariana123\",\n    \"re_password\": \"ariana123\",\n    \"name\": \"Test Araian\",\n    \"categoryId\": \"62e1c365c9c81edd09b1b8a6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/signup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.response);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\": \"hernan123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/forgot-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/verify-code/1234567",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"verify-code",
+								"1234567"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"hernan123\",\n    \"re_password\": \"hernan123\",\n    \"code\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/change-password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/ariana123",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"ariana123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "refresh-token",
+								"value": "{{refreshToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"categoryId\": \"62e1c365c9c81edd09b1b8a6\",\n            \"email\": \"test@gmail.com\",\n            \"username\": \"test1234\",\n            \"name\": \"Test Hernan 2\",\n            \"profileImg\": null,\n            \"bannerImg\": null,\n            \"showTopDonors\": true,\n            \"hideTips\": false,\n            \"tipPrice\": 5,\n            \"twitch\": null,\n            \"facebook\": null,\n            \"youtube\": null,\n            \"instagram\": null,\n            \"twitter\": null\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Add Yape",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "refresh-token",
+								"value": "{{refreshToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"999113934\",\n    \"qr\": \"link\",\n    \"ownerName\": \"Hernan Piero Acero Guerrero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/payment/add-yape",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"add-yape"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add BCP Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "refresh-token",
+								"value": "{{refreshToken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountNumber\": \"107-22020101-23203\",\n    \"cci\": \"1232302320302032\",\n    \"accountOwner\": \"Hernan Piero Acero Guerrero\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/payment/add-bcp",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"add-bcp"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

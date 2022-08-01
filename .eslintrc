@@ -9,8 +9,9 @@
     "prettier"
   ],
   "rules": {
-    "no-console": 0, // Means warning
+    "no-console": 0, //0 Means off, 1 Means warning, 2 means error
     "prettier/prettier": 1,
-    "@typescript-eslint/no-explicit-any": 0 // Means error
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-inferrable-types": 0
   }
 }
