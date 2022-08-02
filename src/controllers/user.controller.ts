@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { omit } from 'lodash';
+import mongoose from 'mongoose';
 import { userPrivateFields } from '../models/user/user.model';
 import { getPaymentMethodFromUser } from '../services/payment.service';
 import { getAllTipsFormUser } from '../services/tip.service';
@@ -7,6 +8,7 @@ import {
   getAllUserCategories,
   queryCategory,
   queryUser,
+  queryUsers,
   queryUserTexts,
   updateUser,
   updateUserTexts,
@@ -97,10 +99,7 @@ export async function updateUserInformationHandler(
   }
 }
 
-export default async function getAllUserCategoriesHandler(
-  req: Request,
-  res: Response
-) {
+export async function getAllUserCategoriesHandler(req: Request, res: Response) {
   try {
     const categories = await getAllUserCategories();
 
@@ -110,6 +109,44 @@ export default async function getAllUserCategoriesHandler(
       data: {
         categories,
       },
+    });
+  } catch (e: any) {
+    return httpError(500, 'Error de servidor', res);
+  }
+}
+
+export async function exploreUsersByCategoryHandler(
+  req: Request,
+  res: Response
+) {
+  try {
+    let searchQuery: Record<string, any> = {};
+
+    const limitOfResults = 8;
+    const { categoryId, query } = req.query;
+
+    if (mongoose.isValidObjectId(categoryId)) {
+      searchQuery = {
+        categoryId,
+      };
+    }
+
+    if (query) {
+      searchQuery = {
+        ...searchQuery,
+        name: {
+          $regex: new RegExp(`.*${query}.*`),
+          $options: 'i',
+        },
+      };
+    }
+
+    const users = await queryUsers(searchQuery, limitOfResults);
+
+    res.status(200).json({
+      message: 'Listando todos los usuarios.',
+      success: true,
+      data: { users },
     });
   } catch (e: any) {
     return httpError(500, 'Error de servidor', res);

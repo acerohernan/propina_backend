@@ -9,7 +9,9 @@ import {
   deleteTipRequestHandler,
   getAllTipRequestsHandler,
 } from '../controllers/tip.controller';
-import getAllUserCategoriesHandler, {
+import {
+  exploreUsersByCategoryHandler,
+  getAllUserCategoriesHandler,
   getUserInformationHandler,
   updateUserInformationHandler,
 } from '../controllers/user.controller';
@@ -28,6 +30,7 @@ import {
 const userRouter = express.Router();
 
 userRouter.get('/category', getAllUserCategoriesHandler);
+userRouter.get('/explore', exploreUsersByCategoryHandler);
 userRouter.get(
   '/:username',
   validateSchema(getUserInformationSchema),

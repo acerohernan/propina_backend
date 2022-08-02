@@ -29,6 +29,20 @@ export async function queryUser(
   }
 }
 
+export async function queryUsers(
+  query: FilterQuery<UserDocument>,
+  limit: number = 10,
+  options: QueryOptions<UserDocument> = {}
+) {
+  try {
+    const users = await UserModel.find(query, options).limit(limit);
+    return users;
+  } catch (e) {
+    console.log(e);
+    throw new Error('Error al obtener los usuarios de la base de datos');
+  }
+}
+
 export async function updateUser(
   query: FilterQuery<UserDocument>,
   update: UpdateQuery<UserDocument>
