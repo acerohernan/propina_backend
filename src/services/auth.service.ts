@@ -27,8 +27,6 @@ export async function reIssueAccessToken(
 
   const { decoded } = verifyJwt(refreshToken);
 
-  console.log('Decoded', decoded);
-
   if (!decoded || !get(decoded, 'session')) return false;
 
   const session = await SessionModel.findOne({
@@ -42,7 +40,7 @@ export async function reIssueAccessToken(
   if (!user) return false;
 
   const newAccessToken = signJwt({
-    ...user,
+    ...user.toJSON(),
     session: session._id,
   });
 

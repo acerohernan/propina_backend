@@ -53,6 +53,11 @@ const userSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model<UserDocument>('User', userSchema);
 
-export const userPrivateFields = ['password', 'createdAt', 'updatedAt'];
+export const userPrivateFields = [
+  'password',
+  'createdAt',
+  'updatedAt',
+  'categoryId',
+];
 
 export default UserModel;

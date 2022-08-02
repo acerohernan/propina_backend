@@ -95,7 +95,7 @@ export async function loginHandler(req: Request, res: Response) {
     });
 
     //Sign access y refresh token
-    const userToJwt = omit(user, userPrivateFields);
+    const userToJwt = omit(user.toJSON(), userPrivateFields);
 
     const {
       jwt: { accessTokenDuration, refreshTokenDuration },
@@ -103,7 +103,7 @@ export async function loginHandler(req: Request, res: Response) {
 
     const accessToken = signJwt(
       {
-        ...user,
+        ...userToJwt,
         session: session._id,
       },
       {
@@ -113,7 +113,7 @@ export async function loginHandler(req: Request, res: Response) {
 
     const refreshToken = signJwt(
       {
-        ...user,
+        ...userToJwt,
         session: session._id,
       },
       {

@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { number, object, string } from 'zod';
 
 export const getUserInformationSchema = object({
@@ -25,5 +26,8 @@ export const updateUserSchema = object({
     tipPrice: number({
       required_error: 'El precio de la propina es requerido',
     }),
+  }).refine((data) => mongoose.isValidObjectId(data.categoryId), {
+    message: 'El id de la categorìa no es válida',
+    path: ['categoryId'],
   }),
 });

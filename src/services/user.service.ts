@@ -1,4 +1,5 @@
 import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+import CategoryModel, { CategoryDocument } from '../models/user/category.model';
 import UserTextsModel, {
   UserTextsDocument,
   UserTextsInput,
@@ -8,7 +9,7 @@ import UserModel, { UserDocument, UserInput } from '../models/user/user.model';
 export async function createUser(user: UserInput) {
   try {
     const newUser = await UserModel.create(user);
-    return newUser.toJSON();
+    return newUser;
   } catch (e) {
     console.log(e);
     throw new Error('Error al guardar el usuario en la base de datos');
@@ -21,8 +22,7 @@ export async function queryUser(
 ) {
   try {
     const user = await UserModel.findOne(query, options);
-
-    return user?.toJSON();
+    return user;
   } catch (e) {
     console.log(e);
     throw new Error('Error al obtener el usuario de la base de datos');
@@ -35,7 +35,7 @@ export async function updateUser(
 ) {
   try {
     const user = await UserModel.findOneAndUpdate(query, update);
-    return user?.toJSON();
+    return user;
   } catch (e: any) {
     console.log(e);
     throw new Error('Error al actualizar el usuario en la base de datos');
@@ -56,7 +56,7 @@ export async function createUserTexts(userTexts: UserTextsInput) {
 
     const newUserTexts = await UserTextsModel.create(texts);
 
-    return newUserTexts.toJSON();
+    return newUserTexts;
   } catch (e) {
     console.log(e);
     throw new Error(
@@ -71,7 +71,7 @@ export async function queryUserTexts(
 ) {
   try {
     const userTexts = await UserTextsModel.findOne(query, options);
-    return userTexts?.toJSON();
+    return userTexts;
   } catch (e) {
     console.log(e);
     throw new Error(
@@ -86,11 +86,31 @@ export async function updateUserTexts(
 ) {
   try {
     const userText = await UserTextsModel.findOneAndUpdate(query, update);
-    return userText?.toJSON();
+    return userText;
   } catch (e: any) {
     console.log(e);
     throw new Error(
       'Error al actualizar los textos del usuario en la base de datos'
     );
+  }
+}
+
+export async function getAllUserCategories() {
+  try {
+    const categories = CategoryModel.find().lean();
+    return categories;
+  } catch (e: any) {
+    throw new Error(
+      'Error al obtener todas las categorías de la base de datos.'
+    );
+  }
+}
+
+export async function queryCategory(query: FilterQuery<CategoryDocument>) {
+  try {
+    const cat = await CategoryModel.findOne(query);
+    return cat;
+  } catch (e) {
+    throw new Error('Error al obtener la categoría en la base de datos.');
   }
 }

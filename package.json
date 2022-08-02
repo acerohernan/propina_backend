@@ -9,9 +9,9 @@
     "yarn": "1.22.19"
   },
   "scripts": {
-    "dev": "export NODE_ENV=development&& ts-node-dev --respawn --transpile-only src/app.ts",
+    "dev": "set NODE_ENV=development&& ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
-    "start": "tsc && export NODE_ENV=production&& node build/src/app.js",
+    "start": "tsc && set NODE_ENV=production&& node build/src/app.js",
     "pre-commit": "yarn lint&& yarn prettier-format",
     "prettier-format": "prettier --config .prettierrc src/**/*.ts --write",
     "lint": "eslint . --ext .ts"

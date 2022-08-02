@@ -16,9 +16,9 @@ export interface UserTipRequestDocument
 
 const UserTipRequestSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  name: { type: String, default: '' },
-  contact: { type: String, default: '' },
-  message: { type: String, default: '' },
+  name: { type: String, default: null },
+  contact: { type: String, default: null },
+  message: { type: String, default: null },
   quantity: { type: Number, required: true },
   voucher: { type: String, required: true },
 });

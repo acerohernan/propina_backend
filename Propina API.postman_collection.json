@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "fc84c5fe-d6c4-4956-a2bb-465d79761b9d",
+		"_postman_id": "19759103-96bf-46b9-a838-166fe2b184f4",
 		"name": "Propina API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13586974"
 	},
 	"item": [
 		{
@@ -15,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"ariana@gmail.com\",\n    \"username\": \"ariana123\",\n    \"password\": \"ariana123\",\n    \"re_password\": \"ariana123\",\n    \"name\": \"Test Araian\",\n    \"categoryId\": \"62e1c365c9c81edd09b1b8a6\"\n}",
+							"raw": "{\n    \"email\": \"hernan@gmail.com\",\n    \"username\": \"hernan123\",\n    \"password\": \"hernan123\",\n    \"re_password\": \"hernan123\",\n    \"name\": \"Test Hernan\",\n    \"categoryId\": \"62e8218a3e0030022addbac3\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -53,7 +54,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\": \"hernan123\"\n}",
+							"raw": "{\n    \"email\": \"hernan@gmail.com\",\n    \"password\": \"hernan123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,13 +169,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/user/ariana123",
+							"raw": "{{url}}/user/hernan123",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"user",
-								"ariana123"
+								"hernan123"
 							]
 						}
 					},
@@ -217,6 +218,24 @@
 							],
 							"path": [
 								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"category"
 							]
 						}
 					},
@@ -310,6 +329,154 @@
 								"user",
 								"payment",
 								"add-bcp"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tip",
+			"item": [
+				{
+					"name": "Create Tip Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"62e825abf5f3f875f970bec3\",\r\n    \"voucher\": \"link\",\r\n    \"quantity\": 2,\r\n    \"name\": \"Ariana Chavez\",\r\n    \"message\": \"Me encanta tu contenido\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/tip",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"tip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tip Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "refresh-token",
+								"value": "{{refresh-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/tip/request",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"tip",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept Tip Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "refresh-token",
+								"value": "{{refresh-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"response\": \"Muchas gracias por la propina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/tip/62e831a6210b175d9d3d93aa/accept",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"tip",
+								"62e831a6210b175d9d3d93aa",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Decline request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "refresh-token",
+								"value": "{{refresh-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/tip/62e944978f36c9d1bfaf9a03/decline",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"tip",
+								"62e944978f36c9d1bfaf9a03",
+								"decline"
 							]
 						}
 					},

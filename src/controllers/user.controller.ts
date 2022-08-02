@@ -2,7 +2,10 @@ import { Request, Response } from 'express';
 import { omit } from 'lodash';
 import { userPrivateFields } from '../models/user/user.model';
 import { getPaymentMethodFromUser } from '../services/payment.service';
+import { getAllTipsFormUser } from '../services/tip.service';
 import {
+  getAllUserCategories,
+  queryCategory,
   queryUser,
   queryUserTexts,
   updateUser,
@@ -18,7 +21,10 @@ export async function getUserInformationHandler(req: Request, res: Response) {
 
     if (!user) return httpError(404, 'Usuario no encontrado', res);
 
-    const userToSend = omit(user, userPrivateFields);
+    const userToSend = omit(user.toJSON(), userPrivateFields);
+
+    //Get user's category
+    const category = await queryCategory({ _id: user?.categoryId });
 
     //Get user's texts
     const texts = await queryUserTexts({ userId: user?._id });
@@ -26,10 +32,13 @@ export async function getUserInformationHandler(req: Request, res: Response) {
     //Get user's payment methods
     const payment = await getPaymentMethodFromUser(user?._id);
 
+    //Get user's tips
+    const tips = await getAllTipsFormUser(user?._id);
+
     res.status(200).json({
       success: true,
       message: 'Usuario encontrado con éxito',
-      data: { user: { ...userToSend, texts, payment } },
+      data: { user: { ...userToSend, category, texts, payment, tips } },
     });
   } catch (e: any) {
     console.log(e);
@@ -85,5 +94,24 @@ export async function updateUserInformationHandler(
   } catch (e: any) {
     console.log(e);
     httpError(500, 'Error de servidor', res);
+  }
+}
+
+export default async function getAllUserCategoriesHandler(
+  req: Request,
+  res: Response
+) {
+  try {
+    const categories = await getAllUserCategories();
+
+    res.status(200).json({
+      message: 'Listando todas las categorías.',
+      success: true,
+      data: {
+        categories,
+      },
+    });
+  } catch (e: any) {
+    return httpError(500, 'Error de servidor', res);
   }
 }
