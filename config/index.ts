@@ -12,6 +12,10 @@ const CONFIG = {
     refreshTokenDuration: process.env.REFRESH_TOKEN_DURATION,
   },
   bcryptSalt: process.env.SALT,
+  mailer: {
+    user: process.env.MAILER_USER,
+    pass: process.env.MAILER_PASSWORD,
+  },
 };
 
 export default CONFIG;

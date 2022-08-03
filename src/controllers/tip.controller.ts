@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { UserTipInput } from '../models/tip/tip.model';
+import { sendEmailForNewTipRequest } from '../services/email.service';
 import {
   createTip,
   createTipRequet,
@@ -19,6 +20,8 @@ export async function createTipRequestHandler(req: Request, res: Response) {
     if (!user) return httpError(400, 'El usuario no existe', res);
 
     await createTipRequet(req.body);
+
+    await sendEmailForNewTipRequest(user?.email, user?.name, req.body.quantity);
 
     res.status(200).json({
       success: false,
